@@ -27,6 +27,17 @@
             justify-content: space-between;
             align-items: center;
         }
+        .nav-branding {
+            display: flex;
+            align-items: center;
+        }
+        
+        .kakao-logo {
+            display: flex;
+            align-items: center;
+            margin-right: 12px;
+        }
+        
         .nav-logo {
             color: #2c3e50;
             font-size: 20px;
@@ -334,7 +345,12 @@
 <body>
     <div class="nav-bar">
         <div class="nav-container">
-            <a href="../index.html" class="nav-logo">테크 용어집</a>
+            <div class="nav-branding">
+                <a href="../index.html" class="kakao-logo">
+                    <img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/5f9c58c2017800001.png" alt="Kakao Logo" width="24" height="24">
+                </a>
+                <a href="../index.html" class="nav-logo">테크 용어집</a>
+            </div>
             <div class="nav-links">
                 <a href="../index.html">홈</a>
                 <a href="../about.html">소개</a>

@@ -159,27 +159,34 @@
         
         /* 하단 배너 스타일 */
         .bottom-banner {
-            background: linear-gradient(90deg, #ff5722, #ff9800);
+            background: linear-gradient(90deg, #000000, #333333);
             color: white;
             padding: 50px 0;
             margin-top: 60px;
             margin-bottom: 50px;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
         }
         
         .bottom-banner-content {
             width: 90%;
-            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 30px;
         }
         
         .banner-text {
             flex: 1;
-            padding-right: 30px;
-            min-width: 300px;
+            min-width: 280px;
         }
         
         .banner-text h2 {
@@ -197,8 +204,8 @@
         }
         
         .banner-cta-btn {
-            background-color: white;
-            color: #ff5722;
+            background-color: #ff5722;
+            color: white;
             padding: 15px 30px;
             border-radius: 30px;
             font-weight: bold;
@@ -208,23 +215,36 @@
             display: inline-block;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             margin-top: 20px;
+            border: 2px solid #ff5722;
         }
         
         .banner-cta-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            background-color: #f8f8f8;
+            background-color: transparent;
+            color: #ff5722;
         }
         
         @media (max-width: 768px) {
+            .bottom-banner {
+                padding: 40px 0;
+                width: 100%;
+            }
+            
             .bottom-banner-content {
+                width: 90%;
                 flex-direction: column;
                 text-align: center;
+                gap: 20px;
             }
             
             .banner-text {
-                padding-right: 0;
-                margin-bottom: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .banner-cta-btn {
+                padding: 12px 25px;
+                font-size: 15px;
             }
         }
         
@@ -251,6 +271,17 @@
             justify-content: space-between;
             align-items: center;
         }
+        .nav-branding {
+            display: flex;
+            align-items: center;
+        }
+        
+        .kakao-logo {
+            display: flex;
+            align-items: center;
+            margin-right: 12px;
+        }
+        
         .nav-logo {
             color: #2c3e50;
             font-size: 20px;
@@ -324,7 +355,12 @@
 <body>
     <div class="nav-bar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">테크 용어집</a>
+            <div class="nav-branding">
+                <a href="index.html" class="kakao-logo">
+                    <img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/5f9c58c2017800001.png" alt="Kakao Logo" width="24" height="24">
+                </a>
+                <a href="index.html" class="nav-logo">테크 용어집</a>
+            </div>
             <div class="nav-links">
                 <a href="index.html">홈</a>
                 <a href="about.html">소개</a>
