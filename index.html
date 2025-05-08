@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테크 용어집</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #2c3e50;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        .auth-links a {
+            text-decoration: none;
+            color: #ff5722;
+            margin-left: 15px;
+            font-size: 14px;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        .auth-links span {
+            color: #555;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        .category-filters {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .category-filters button {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+        }
+        .category-filters button.active,
+        .category-filters button:hover {
+            background-color: #ff5722;
+            color: white;
+            border-color: #ff5722;
+        }
+        .glossary-list-header {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .term-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: relative; /* For NEW badge positioning */
+        }
+        .term-card .new-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            font-size: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .term-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #ff5722;
+        }
+        .term-card .category {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            display: inline-block;
+            background-color: #ecf0f1;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .term-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .term-card .details-link {
+            text-decoration: none;
+            color: #ff5722;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .term-card .details-link:hover {
+            text-decoration: underline;
+        }
+
+        .load-more-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .load-more-btn {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .load-more-btn:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* 네비게이션 바 스타일 */
+        .nav-bar {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ff5722;
+        }
+        
+        /* 배너 스타일 */
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1582139329536-e7284fece509?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .banner-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .banner h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            opacity: 0.95;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-btn {
+            display: inline-block;
+            background-color: #ff5722;
+            color: white;
+            font-weight: bold;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .banner-btn:hover {
+            background-color: #e64a19;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">테크 용어집</a>
+            <div class="nav-links">
+                <a href="index.html">홈</a>
+                <a href="about.html">소개</a>
+                <a href="login.html">로그인</a>
+                <a href="signup.html">회원가입</a>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="banner-content">
+            <h2>테크 용어집에 오신 것을 환영합니다!</h2>
+            <p>최신 기술 용어와 개념을 쉽게 이해할 수 있습니다.</p>
+            <a href="about.html" class="banner-btn">자세히 알아보기</a>
+        </div>
+    </div>
+    <div class="container">
+        <header>
+            <h1>테크 용어집</h1>
+            <div class="header-right">
+                <input type="search" class="search-bar" placeholder="Q 용어 검색... (Ctrl + K)">
+                <div class="auth-links">
+                    <a href="login.html">로그인</a>
+                    <a href="signup.html">회원가입</a>
+                </div>
+            </div>
+        </header>
+
+        <nav class="category-filters">
+            <button class="active">전체</button>
+            <button>프로그래밍</button>
+            <button>웹 개발</button>
+            <button>인공지능</button>
+            <button>클라우드</button>
+            <button>보안</button>
+        </nav>
+
+        <h2 class="glossary-list-header">용어 목록</h2>
+        <main class="glossary-grid">
+            <!-- 기존 용어 -->
+            <article class="term-card">
+                <span class="category">앱 개발</span>
+                <h3>API</h3>
+                <p>애플리케이션 프로그래밍 인터페이스(Application Programming Interface)의 약자로, 서로 다른 소프트웨어 간의 통신 방법을 정의합니다.</p>
+                <a href="terms/api.html" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">프로그래밍</span>
+                <h3>알고리즘</h3>
+                <p>문제를 해결하기 위한 명확하게 정의된 단계별 절차입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">인공지능</span>
+                <h3>머신 러닝</h3>
+                <p>컴퓨터가 명시적인 프로그래밍 없이 데이터로부터 학습하고 예측하는 인공지능의 한 분야입니다.</p>
+                <a href="terms/machine-learning.html" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">프로그래밍</span>
+                <h3>프레임워크</h3>
+                <p>소프트웨어 개발을 위한 구조와 도구를 제공하는 플랫폼입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">클라우드</span>
+                <h3>클라우드 컴퓨팅</h3>
+                <p>인터넷을 통해 컴퓨팅 리소스를 제공하는 서비스 모델입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">인공지능</span>
+                <h3>딥러닝</h3>
+                <p>인간의 뇌를 모방한 인공신경망을 사용하는 머신러닝의 한 분야입니다.</p>
+                <a href="terms/deep-learning.html" class="details-link">자세히 보기</a>
+            </article>
+
+            <!-- AI 관련 용어 -->
+            <article class="term-card">
+                <span class="new-badge">NEW</span>
+                <span class="category">인공지능</span>
+                <h3>CNN</h3>
+                <p>합성곱 신경망(Convolutional Neural Network)으로, 이미지 처리와 컴퓨터 비전 태스크에 주로 활용되는 딥러닝 모델입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="new-badge">NEW</span>
+                <span class="category">인공지능</span>
+                <h3>트랜스포머</h3>
+                <p>자기주의(Self-Attention) 메커니즘을 사용하는 신경망 구조로, 자연어 처리에 혁신적인 성능을 가져온 AI 모델입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="new-badge">NEW</span>
+                <span class="category">인공지능</span>
+                <h3>LLM</h3>
+                <p>대규모 언어 모델(Large Language Model)로, 방대한 양의 텍스트 데이터로 학습되어 텍스트 생성 및 이해 능력을 가진 AI 모델입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">인공지능</span>
+                <h3>강화학습</h3>
+                <p>행동에 대한 보상이나 패널티를 통해 시행착오로 학습하는 머신러닝 방법론입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">인공지능</span>
+                <h3>생성형 AI</h3>
+                <p>텍스트, 이미지, 음악, 비디오 등의 새로운 콘텐츠를 생성할 수 있는 인공지능 기술입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">인공지능</span>
+                <h3>임베딩</h3>
+                <p>텍스트, 이미지 등의 데이터를 벡터 공간에 매핑하여 AI 모델이 이해하기 쉬운 형태로 변환하는 것입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <!-- 개발 관련 용어 -->
+            <article class="term-card">
+                <span class="new-badge">NEW</span>
+                <span class="category">웹 개발</span>
+                <h3>SPA</h3>
+                <p>단일 페이지 애플리케이션(Single Page Application)의 약자로, 웹 페이지를 새로고침 없이 동적으로 업데이트하는 웹 애플리케이션입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">웹 개발</span>
+                <h3>REST API</h3>
+                <p>HTTP 프로토콜을 사용하여 리소스에 접근하고 조작할 수 있는 아키텍처 스타일입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">개발 방법론</span>
+                <h3>애자일</h3>
+                <p>반복적인 개발 주기를 통해 유연성과 협업을 강조하는 소프트웨어 개발 방법론입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">웹 개발</span>
+                <h3>WebAssembly</h3>
+                <p>웹 브라우저에서 고성능 실행을 위한 바이너리 명령 형식으로, C, C++, Rust 등의 언어로 작성된 코드를 웹에서 실행할 수 있게 합니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="new-badge">NEW</span>
+                <span class="category">DevOps</span>
+                <h3>CI/CD</h3>
+                <p>지속적 통합(Continuous Integration)과 지속적 배포(Continuous Deployment)의 약자로, 코드 변경 사항을 자동으로 빌드, 테스트 및 배포하는 프로세스입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">인프라</span>
+                <h3>컨테이너화</h3>
+                <p>애플리케이션과 그 종속성을 단일 패키지로 묶어 다양한 환경에서 일관되게 실행하는 기술입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">프로그래밍</span>
+                <h3>마이크로서비스</h3>
+                <p>애플리케이션을 작고 독립적인 서비스들로 분리하여 개발 및 배포하는 아키텍처 스타일입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+
+            <article class="term-card">
+                <span class="category">보안</span>
+                <h3>OAuth</h3>
+                <p>사용자의 비밀번호를 공유하지 않고 제3자 서비스에 접근 권한을 부여하는 인증 프로토콜입니다.</p>
+                <a href="#" class="details-link">자세히 보기</a>
+            </article>
+        </main>
+
+        <div class="load-more-container">
+            <button id="load-more-btn" class="load-more-btn">더 많은 용어 보기</button>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 테크 용어집. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/glossary.js"></script>
+</body>
+</html>

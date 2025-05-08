@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>용어명 - 테크 용어집</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 네비게이션 바 스타일 */
+        .nav-bar {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ff5722;
+        }
+        
+        /* 배너 스타일 */
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1582139329536-e7284fece509?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .banner-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .banner h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .term-category {
+            display: inline-block;
+            background-color: #ff5722;
+            color: white;
+            padding: 4px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        /* 컨텐츠 스타일 */
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .term-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .term-definition {
+            font-size: 18px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff5722;
+            display: inline-block;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ff5722;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffca28;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .term-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* 관련 용어 스타일 */
+        .related-terms {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .related-terms h3 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .related-terms-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .related-term-link {
+            background-color: #f4f7f6;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .related-term-link:hover {
+            background-color: #ff5722;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .related-term-link:before {
+            content: "•";
+            margin-right: 8px;
+            color: inherit;
+        }
+        
+        /* 댓글 섹션 스타일 */
+        .comments-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .comments-section h3 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .comment-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            min-height: 100px;
+            margin-bottom: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .comment-form button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .comment-form button:hover {
+            background-color: #e64a19;
+        }
+        .comments-list {
+            margin-top: 30px;
+        }
+        .comment {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 0;
+        }
+        .comment:last-child {
+            border-bottom: none;
+        }
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .comment-date {
+            color: #777;
+            font-size: 14px;
+        }
+        .comment-body {
+            color: #555;
+        }
+        
+        /* 푸터 스타일 */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #f4f7f6;
+            border-top: 1px solid #e0e0e0;
+            color: #555;
+            margin-top: 50px;
+        }
+        footer p {
+            margin: 10px 0;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        .footer-links {
+            margin-top: 20px;
+        }
+        .footer-links a {
+            color: #ff5722;
+            text-decoration: none;
+            margin: 0 10px;
+            opacity: 0.9;
+        }
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* 페이지 내비게이션 스타일 */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        .page-nav-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .page-nav-button:hover {
+            border-color: #ff5722;
+            color: #ff5722;
+        }
+        .prev-button:before {
+            content: "←";
+            margin-right: 8px;
+        }
+        .next-button:after {
+            content: "→";
+            margin-left: 8px;
+        }
+        .back-to-glossary {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f4f7f6;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .back-to-glossary:hover {
+            background-color: #ff5722;
+            color: white;
+            border-color: #ff5722;
+        }
+        .back-to-glossary:before {
+            content: "←";
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">테크 용어집</a>
+            <div class="nav-links">
+                <a href="index.html">홈</a>
+                <a href="about.html">소개</a>
+                <a href="login.html">로그인</a>
+                <a href="signup.html">회원가입</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="banner">
+        <div class="banner-content">
+            <span class="term-category">카테고리</span>
+            <h1>용어명</h1>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="term-content">
+            <div class="term-definition">
+                <!-- 용어 정의 -->
+                <p>용어에 대한 간략한 정의 내용이 들어갑니다.</p>
+            </div>
+            
+            <h2>상세 설명</h2>
+            <p>용어에 대한 상세 설명 내용이 들어갑니다. 이 부분에는 개념의 역사나 중요성, 동작 원리 등의 내용이 포함될 수 있습니다.</p>
+            
+            <h2>주요 특징</h2>
+            <ul>
+                <li>특징 1에 대한 설명</li>
+                <li>특징 2에 대한 설명</li>
+                <li>특징 3에 대한 설명</li>
+            </ul>
+            
+            <h2>활용 예시</h2>
+            <p>이 개념이 실제로 어떻게 활용되는지에 대한 설명이 들어갑니다.</p>
+            
+            <div class="code-block">
+// 코드 예시가 들어갑니다
+function example() {
+    // 코드 내용
+    return result;
+}
+            </div>
+            
+            <div class="note">
+                <strong>참고:</strong> 특별히 알아두어야 할 사항이나 팁이 들어갑니다.
+            </div>
+            
+            <h2>관련 기술</h2>
+            <p>이 용어와 관련된 기술이나 개념에 대한 설명이 들어갑니다.</p>
+        </div>
+        
+        <div class="related-terms">
+            <h3>관련 용어</h3>
+            <div class="related-terms-list">
+                <a href="#" class="related-term-link">관련 용어 1</a>
+                <a href="#" class="related-term-link">관련 용어 2</a>
+                <a href="#" class="related-term-link">관련 용어 3</a>
+                <a href="#" class="related-term-link">관련 용어 4</a>
+            </div>
+        </div>
+        
+        <div class="comments-section">
+            <h3>댓글</h3>
+            <div class="comment-form">
+                <textarea placeholder="댓글을 작성해주세요..."></textarea>
+                <button>댓글 작성</button>
+            </div>
+            <div class="comments-list">
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">사용자명</span>
+                        <span class="comment-date">2025.05.08</span>
+                    </div>
+                    <div class="comment-body">
+                        <p>댓글 내용이 들어갑니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page-navigation">
+            <a href="index.html" class="back-to-glossary">용어집으로 돌아가기</a>
+            <div>
+                <a href="#" class="page-nav-button prev-button">이전 용어</a>
+                <a href="#" class="page-nav-button next-button">다음 용어</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 테크 용어집. All rights reserved.</p>
+        <p>최신 기술 용어와 개념을 쉽게 이해할 수 있는 한국어 기반 온라인 플랫폼</p>
+        <div class="footer-links">
+            <a href="index.html">홈</a>
+            <a href="about.html">소개</a>
+            <a href="#">개인정보처리방침</a>
+            <a href="#">이용약관</a>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

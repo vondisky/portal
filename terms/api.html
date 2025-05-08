@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API - 테크 용어집</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 네비게이션 바 스타일 */
+        .nav-bar {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ff5722;
+        }
+        
+        /* 배너 스타일 */
+        .banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1582139329536-e7284fece509?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .banner-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .banner h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .term-category {
+            display: inline-block;
+            background-color: #ff5722;
+            color: white;
+            padding: 4px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        /* 컨텐츠 스타일 */
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .term-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .term-definition {
+            font-size: 18px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff5722;
+            display: inline-block;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ff5722;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffca28;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .term-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* 관련 용어 스타일 */
+        .related-terms {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .related-terms h3 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .related-terms-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .related-term-link {
+            background-color: #f4f7f6;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .related-term-link:hover {
+            background-color: #ff5722;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .related-term-link:before {
+            content: "•";
+            margin-right: 8px;
+            color: inherit;
+        }
+        
+        /* 댓글 섹션 스타일 */
+        .comments-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .comments-section h3 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .comment-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            min-height: 100px;
+            margin-bottom: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .comment-form button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .comment-form button:hover {
+            background-color: #e64a19;
+        }
+        .comments-list {
+            margin-top: 30px;
+        }
+        .comment {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 0;
+        }
+        .comment:last-child {
+            border-bottom: none;
+        }
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .comment-date {
+            color: #777;
+            font-size: 14px;
+        }
+        .comment-body {
+            color: #555;
+        }
+        
+        /* 푸터 스타일 */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #f4f7f6;
+            border-top: 1px solid #e0e0e0;
+            color: #555;
+            margin-top: 50px;
+        }
+        footer p {
+            margin: 10px 0;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        .footer-links {
+            margin-top: 20px;
+        }
+        .footer-links a {
+            color: #ff5722;
+            text-decoration: none;
+            margin: 0 10px;
+            opacity: 0.9;
+        }
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* 페이지 내비게이션 스타일 */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        .page-nav-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .page-nav-button:hover {
+            border-color: #ff5722;
+            color: #ff5722;
+        }
+        .prev-button:before {
+            content: "←";
+            margin-right: 8px;
+        }
+        .next-button:after {
+            content: "→";
+            margin-left: 8px;
+        }
+        .back-to-glossary {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f4f7f6;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .back-to-glossary:hover {
+            background-color: #ff5722;
+            color: white;
+            border-color: #ff5722;
+        }
+        .back-to-glossary:before {
+            content: "←";
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">테크 용어집</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="../about.html">소개</a>
+                <a href="../login.html">로그인</a>
+                <a href="../signup.html">회원가입</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="banner">
+        <div class="banner-content">
+            <span class="term-category">앱 개발</span>
+            <h1>API</h1>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="term-content">
+            <div class="term-definition">
+                <p>API(Application Programming Interface)는 서로 다른 소프트웨어 시스템 간의 통신 방법과 규칙을 정의한 인터페이스입니다. API를 통해 애플리케이션은 다른 시스템의 기능에 접근하고 데이터를 교환할 수 있습니다.</p>
+            </div>
+            
+            <h2>상세 설명</h2>
+            <p>API는 현대 소프트웨어 개발의 핵심 요소로, 다양한 애플리케이션과 서비스가 서로 연결되고 통합될 수 있게 합니다. API는 마치 소프트웨어 세계의 계약서와 같은 역할을 하여, 서로 다른 시스템이 어떻게 상호작용해야 하는지 명확하게 정의합니다.</p>
+            
+            <p>API는 다양한 기능을 제공합니다:</p>
+            <ul>
+                <li>서비스나 애플리케이션 간 데이터 교환</li>
+                <li>특정 기능을 외부 시스템에 노출</li>
+                <li>애플리케이션 개발 간소화 및 표준화</li>
+                <li>타사 개발자들이 기존 서비스를 활용해 새로운 애플리케이션 개발 가능</li>
+            </ul>
+            
+            <h2>API의 종류</h2>
+            <p>API는 크게 다음과 같은 유형으로 분류할 수 있습니다:</p>
+            
+            <h3>1. 웹 API</h3>
+            <p>HTTP/HTTPS 프로토콜을 사용하여 인터넷을 통해 접근 가능한 API입니다. 대표적인 웹 API 유형으로는 다음과 같은 것들이 있습니다:</p>
+            <ul>
+                <li><strong>REST API</strong>: HTTP 메서드(GET, POST, PUT, DELETE 등)를 사용하여 리소스에 접근하는 아키텍처 스타일</li>
+                <li><strong>SOAP API</strong>: XML 기반의 메시지 프로토콜을 사용하는 보다 엄격한 구조의 API</li>
+                <li><strong>GraphQL API</strong>: 클라이언트가 필요한 데이터만 정확히 요청할 수 있는 쿼리 언어 기반 API</li>
+            </ul>
+            
+            <h3>2. 라이브러리 API</h3>
+            <p>프로그래밍 언어나 플랫폼에서 제공하는 함수나 클래스 집합으로, 개발자가 직접 코드에 통합하여 사용합니다. 예를 들어 Java API, .NET API, Python 표준 라이브러리 등이 있습니다.</p>
+            
+            <h3>3. 운영체제 API</h3>
+            <p>운영체제의 기능에 접근할 수 있게 해주는 API로, 파일 시스템, 네트워크, 그래픽 등의 하드웨어 자원을 프로그램이 활용할 수 있게 합니다.</p>
+            
+            <h2>REST API 예시</h2>
+            <p>REST API는 현재 가장 널리 사용되는 웹 API 형태입니다. 다음은 간단한 REST API 요청과 응답의 예시입니다:</p>
+            
+            <div class="code-block">
+// GET 요청 예시 (사용자 정보 조회)
+GET /api/users/123 HTTP/1.1
+Host: example.com
+Accept: application/json
+
+// 응답
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 123,
+  "name": "홍길동",
+  "email": "hong@example.com",
+  "role": "user",
+  "created_at": "2025-01-15T09:30:00Z"
+}
+            </div>
+            
+            <div class="note">
+                <strong>참고:</strong> API 설계 시 보안, 버전 관리, 성능, 문서화 등 다양한 측면을 고려해야 합니다. 특히 공개 API의 경우 인증 및 권한 관리가 매우 중요합니다.
+            </div>
+            
+            <h2>API의 장점</h2>
+            <ul>
+                <li><strong>모듈성</strong>: 애플리케이션을 독립적인 모듈로 개발할 수 있어 유지보수와 확장이 용이합니다.</li>
+                <li><strong>효율성</strong>: 기존 기능을 재활용하여 개발 시간과 비용을 절약할 수 있습니다.</li>
+                <li><strong>표준화</strong>: 표준 인터페이스를 통해 일관된 방식으로 시스템 간 통신이 가능합니다.</li>
+                <li><strong>혁신 촉진</strong>: 개발자들이 새로운 서비스와 애플리케이션을 쉽게 만들 수 있도록 합니다.</li>
+            </ul>
+            
+            <h2>API 활용 사례</h2>
+            <p>API는 다양한 산업과 분야에서 활용되고 있습니다:</p>
+            <ul>
+                <li>소셜 미디어 플랫폼의 콘텐츠를 웹사이트나 앱에 통합(Facebook, Twitter API)</li>
+                <li>결제 시스템 통합(PayPal, Stripe API)</li>
+                <li>지도 및 위치 서비스 제공(Google Maps, Kakao Maps API)</li>
+                <li>날씨 정보 제공(OpenWeatherMap API)</li>
+                <li>클라우드 서비스 관리(AWS, Google Cloud, Azure API)</li>
+            </ul>
+        </div>
+        
+        <div class="related-terms">
+            <h3>관련 용어</h3>
+            <div class="related-terms-list">
+                <a href="rest-api.html" class="related-term-link">REST API</a>
+                <a href="http.html" class="related-term-link">HTTP</a>
+                <a href="json.html" class="related-term-link">JSON</a>
+                <a href="microservices.html" class="related-term-link">마이크로서비스</a>
+                <a href="oauth.html" class="related-term-link">OAuth</a>
+                <a href="graphql.html" class="related-term-link">GraphQL</a>
+            </div>
+        </div>
+        
+        <div class="comments-section">
+            <h3>댓글</h3>
+            <div class="comment-form">
+                <textarea placeholder="댓글을 작성해주세요..."></textarea>
+                <button>댓글 작성</button>
+            </div>
+            <div class="comments-list">
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">개발자123</span>
+                        <span class="comment-date">2025.05.05</span>
+                    </div>
+                    <div class="comment-body">
+                        <p>API 개념을 쉽게 설명해주셔서 감사합니다. 실무에서 사용할 때 권한 관리와 인증 부분이 항상 어려웠는데, 이 부분에 대한 더 자세한 내용도 추가되면 좋을 것 같아요.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">테크러버</span>
+                        <span class="comment-date">2025.05.06</span>
+                    </div>
+                    <div class="comment-body">
+                        <p>API 설계 모범 사례에 대한 내용도 있으면 더 도움이 될 것 같습니다. 버전 관리는 어떻게 하는 것이 좋은지 궁금합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page-navigation">
+            <a href="../index.html" class="back-to-glossary">용어집으로 돌아가기</a>
+            <div>
+                <a href="algorithm.html" class="page-nav-button next-button">다음 용어: 알고리즘</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 테크 용어집. All rights reserved.</p>
+        <p>최신 기술 용어와 개념을 쉽게 이해할 수 있는 한국어 기반 온라인 플랫폼</p>
+        <div class="footer-links">
+            <a href="../index.html">홈</a>
+            <a href="../about.html">소개</a>
+            <a href="#">개인정보처리방침</a>
+            <a href="#">이용약관</a>
+        </div>
+    </footer>
+
+    <script src="../js/auth.js"></script>
+</body>
+</html>
